@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Workmark瀑布流</title>
+	<link rel="stylesheet" href="css/site.css">
+	<link rel="stylesheet" href="css/lightbox.css">
+	<style type="text/css">	
+	#main{position:relative;margin: 10px auto; padding: 10px;}
+	#tiles{position:relative;}
+	#tiles li{width:236px;padding:4px;border:1px solid #dedede;border-radius:2px;background-color:#fff;cursor:pointer;}
+	#tiles li img{display:block;}
+	#tiles li p{margin:6px;color:#666;font:12px/20px Arial;text-align:center;}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<ul id="tiles">
+			<li><a href="images/0.jpg" rel="lightbox"><img src="images/0.jpg" alt=""/></a></li>
+			<li><a href="images/1.jpg" rel="lightbox"><img src="images/1.jpg" alt=""/></a></li>
+			<li><a href="images/2.jpg" rel="lightbox"><img src="images/2.jpg" alt=""/></a></li>
+			<li><a href="images/3.jpg" rel="lightbox"><img src="images/3.jpg" alt=""/></a></li>
+			<li><a href="images/4.jpg" rel="lightbox"><img src="images/4.jpg" alt=""/></a></li>
+			<li><a href="images/5.jpg" rel="lightbox"><img src="images/5.jpg" alt=""/></a></li>
+			<li><a href="images/6.jpg" rel="lightbox"><img src="images/6.jpg" alt=""/></a></li>
+			<li><a href="images/7.jpg" rel="lightbox"><img src="images/7.jpg" alt=""/></a></li>
+			<li><a href="images/8.jpg" rel="lightbox"><img src="images/8.jpg" alt=""/></a></li>
+			<li><a href="images/9.jpg" rel="lightbox"><img src="images/9.jpg" alt=""/></a></li>
+			<li><a href="images/10.jpg" rel="lightbox"><img src="images/10.jpg" alt=""/></a></li>
+			<li><a href="images/11.jpg" rel="lightbox"><img src="images/11.jpg" alt=""/></a></li>
+			<li><a href="images/12.jpg" rel="lightbox"><img src="images/12.jpg" alt=""/></a></li>
+		</ul>
+	</div>
+
+	<div class="row">
+		<div class="recommend-line"><span><a href="javascript:;" id="get-more">查看更多...</a></span></div>
+	</div>
+
+	<div id="loading"><img src="images/load.gif" style="vertical-align: middle;width:40px; height:40px;" alt="" border="0" />正在加载...</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.wookmark.min.js"></script>
+	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/lightbox.min.js"></script>
+	<script>
+	(function($){
+		var loadingNode = $('#loading');
+		var waterfall = $('#main');
+		var tiles = $("#tiles");
+		var items = $('li', tiles);
+		var loadedImages = 0;
+		var options = {
+			autoResize: true, 		//是否在浏览器窗口大小变化时进行重新布局
+			container: waterfall,	//父容器
+			offset: 10,				//列表项目的间距 (px)，横向纵向相同
+			outerOffset: 5,			//外部间距，与父容器顶部的间距
+			itemWidth:244, 			//列表项目的宽度 (px 或 %)
+			flexibleWidth: '50%' 	// Optional, the maximum width of a grid item
+		};
+
+		function applyLayout(){
+			options.container.imagesLoaded(function() {			
+				items.wookmark(options);
+				// Destroy the old handler
+			     if (items.wookmarkInstance) {
+			        items.wookmarkInstance.clear();
+			     }
+
+			    // Create a new layout handler.
+			    items = $('li', tiles);
+			    items.wookmark(options);
+			}).progress(function(instance, image) {
+				loadedImages++;
+				if (loadedImages == items.length){
+					console.log('loaded success.');
+				}else{
+					console.log('loaded ' + (loadedImages / items.length * 100) + '%');
+				}
+			});
+		}
+		applyLayout();
+
+		$("#get-more").click(function(){
+			loadData();
+		});
+
+		function loadData(){
+			loadingNode.show();
+	    	/*var result = {"data":[{"src":"images/0.jpg"},{"src":"images/1.jpg"}, {"src":"images/2.jpg"}, {"src":"images/3.jpg"}, {"src":"images/4.jpg"}, {"src":"images/5.jpg"}]};
+	    	var html = '';
+	    	$.each(result.data, function(index, item){
+	    		html += '<li>ef="'+item.src+'" rel="lightbox"><img src="'+item.src+'" alt="" /></a></li>';  	});
+	    	var items = $(html);
+	    	tiles.append(items);*/
+	    	items = $('li', tiles),
+	        firstTen = items.slice(0, 10);
+	        tiles.append(firstTen.clone());
+			applyLayout();	        
+	    	loadingNode.hide();
+		}
+	})(jQuery);
+	</script>
+</body>
+</html>

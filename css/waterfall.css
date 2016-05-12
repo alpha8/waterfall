@@ -1,0 +1,21 @@
+#waterfall{
+	position: relative;
+	width: 100%;
+}
+
+.box{
+	padding: 15px 0px 0px 15px;	
+	float: left;
+}
+
+.pic{
+	padding: 10px;
+	outline: none;
+	border: 1px solid #ccc;	
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 0 5px #ccc;
+	-moz-box-shadow: 0 0 5px #ccc;
+	box-shadow: 0 0 5px #ccc;
+}

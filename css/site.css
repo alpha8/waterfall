@@ -1,0 +1,64 @@
+html,body,div,p,ul,ol,li,span,fieldset,legend,h1,h2,h3,h4,h5,h6,table,tr,th,td,caption,form,address,iframe,blockquote,pre{
+	margin: 0px;
+	padding: 0px;
+}
+
+ul, ol{
+	list-style: none;
+}
+
+a, a:hover, a:visited{
+	text-decoration: none;
+}
+
+.recommend-line{
+	position:relative;
+	padding:20px 0px;
+	text-align: center;			
+}
+.recommend-line:before, .recommend-line:after{
+	content: "";
+	width:25%;
+	top:38px;
+	position: absolute;
+	display: block;
+	border-top:1px solid #ededed;
+}
+
+.recommend-line:before{			
+	left:0px;
+}
+
+.recommend-line:after{			
+	right:0px;
+}
+
+.recommend-line a{
+	display: inline-block;
+	font-size: 16px;
+	color: #999;
+	padding: 10px;
+	background-color: #fafafa;
+	width: 47%;
+}
+
+.recommend-line a:hover{
+	background-color: #ccc;
+}
+
+#loading{
+	display: none;
+	width:180px;
+	height:45px;
+	line-height: 45px;
+	text-align: center;
+	border: 1px solid #0FC8F8;
+	border-radius: 2px;
+	box-shadow: 0 0 4px rgba(15,200,248,0.8);
+	position: fixed;
+	top:50%;
+	left:50%;
+	color:#9E8484;
+	background-color: #fff;
+	z-index: 100;
+}

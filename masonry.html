@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Masonry实现瀑布流</title>
+	<link rel="stylesheet" href="css/site.css">
+	<link rel="stylesheet" href="css/lightbox.css">
+	<style type="text/css">
+	.container-fluid {
+		padding: 20px;
+		margin: 0 auto;
+		width: 90%;
+	 }
+	.box {
+		margin-bottom: 20px;
+		float: left;
+		width: 220px;
+	}
+	.box img {
+		max-width: 100%
+	}
+	</style>
+</head>
+<body>
+	<div id="masonry" class="container-fluid">
+		<div class="box">
+			<a href="images/0.jpg" data-lightbox="lightbox_"><img src="images/0.jpg" alt=""/></a>
+		</div>
+		<div class="box">
+			<a href="images/1.jpg" data-lightbox="lightbox_"><img src="images/1.jpg" alt=""/></a>
+		</div>
+		<div class="box">
+			<a href="images/2.jpg" data-lightbox="lightbox_"><img src="images/2.jpg" alt=""/></a>
+		</div>
+		<div class="box">
+			<a href="images/3.jpg" data-lightbox="lightbox_"><img src="images/3.jpg" alt=""/></a>
+		</div>
+		<div class="box">
+			<a href="images/4.jpg" data-lightbox="lightbox_"><img src="images/4.jpg" alt=""/></a>
+		</div>
+		<div class="box">
+			<a href="images/5.jpg" data-lightbox="lightbox_"><img src="images/5.jpg" alt=""/></a>
+		</div>
+		<div class="box">
+			<a href="images/6.jpg" data-lightbox="lightbox_"><img src="images/6.jpg" alt=""/></a>
+		</div>
+		<div class="box">
+			<a href="images/7.jpg" data-lightbox="lightbox_"><img src="images/7.jpg" alt=""/></a>
+		</div>
+		<div class="box">
+			<a href="images/8.jpg" data-lightbox="lightbox_"><img src="images/8.jpg" alt=""/></a>
+		</div>
+		<div class="box">
+			<a href="images/9.jpg" data-lightbox="lightbox_"><img src="images/9.jpg" alt=""/></a>
+		</div>
+		<div class="box">
+			<a href="images/10.jpg" data-lightbox="lightbox_"><img src="images/10.jpg" alt=""/></a>
+		</div>
+		<div class="box">
+			<a href="images/11.jpg" data-lightbox="lightbox_"><img src="images/11.jpg" alt=""/></a>
+		</div>
+		<div class="box">
+			<a href="images/12.jpg" data-lightbox="lightbox_"><img src="images/12.jpg" alt=""/></a>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="recommend-line"><span><a href="javascript:;" id="get-more">查看更多...</a></span></div>
+	</div>
+
+	<div id="loading"><img src="images/load.gif" style="vertical-align: middle;width:40px; height:40px;" alt="" border="0" />正在加载...</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/masonry.pkgd.min.js"></script>
+	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/lightbox.min.js"></script>
+	<script>
+	(function($) {
+		var loadingNode = $('#loading');
+	    var container = $('#masonry');
+	    var mansonry;
+
+	    container.imagesLoaded(function() {
+	        mansonry = new Masonry(container[0], {
+	            itemSelector: '.box',
+	            gutter: 20,
+	            isAnimated: true,
+	            transitionDuration: '0.8s',
+				hiddenStyle: { opacity: 0 },
+				visibleStyle: { opacity: 1}
+	        });
+	    });
+	   /* $(window).scroll(function(){
+	    	if($(document).height() - $(window).height() - $(document).scrollTop() < 10) {
+				loadData();
+			}
+	    });*/
+
+	    $("#get-more").click(function(){
+	    	loadData();
+	    });
+
+	    function loadData(){
+	    	loadingNode.show();
+	    	var result = {"data":[{"src":"images/0.jpg"},{"src":"images/1.jpg"}, {"src":"images/2.jpg"}, {"src":"images/3.jpg"}, {"src":"images/4.jpg"}, {"src":"images/5.jpg"}]};
+	    	var html = '';
+	    	$.each(result.data, function(index, item){
+	    		html += '<div class="box"><a href="'+item.src+'" data-lightbox="lightbox_"><img src="'+item.src+'" alt="" /></a></div>';
+	    	});
+	    	var items = $(html);
+	    	container.append(items);
+	    	mansonry.appended(items);
+	    	loadingNode.hide();	    	
+	    }
+	})(jQuery);
+	</script>
+</body>
+</html>
