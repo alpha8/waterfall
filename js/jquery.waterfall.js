@@ -22,6 +22,10 @@ function waterfall(){
 	var boxes = $("#waterfall>.box");
 	var boxW = boxes.eq(0).outerWidth();
 	var cols = Math.floor($("#waterfall").width()/boxW);
+	$("#waterfall").css({
+		"width" : boxW*cols,
+		"margin" : "0px auto"
+	});
 
 	var hArr = [];
 	boxes.each(function(i, item){
